@@ -15,12 +15,10 @@
             @php
                 $navItems = [
                     ['route' => 'dashboard', 'label' => "Aujourd'hui", 'icon' => 'sun'],
-                    ['route' => 'routines', 'label' => 'Routines & Projets', 'icon' => 'checklist'],
                     ['route' => 'groupe', 'label' => 'Groupe', 'icon' => 'people'],
                 ];
                 $icons = [
                     'sun' => '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/>',
-                    'checklist' => '<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1.3 1.3L7.5 5"/><path d="M4 12l1.3 1.3 2.2-2.3"/><path d="M4 18l1.3 1.3 2.2-2.3"/>',
                     'people' => '<circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9" r="2.4"/><path d="M2.8 19c.6-3 2.7-4.6 5.7-4.6s5.1 1.6 5.7 4.6"/><path d="M14.6 14.9c2.3.2 3.9 1.7 4.4 4.1"/>',
                     'user' => '<circle cx="12" cy="8.2" r="3.4"/><path d="M5 19.4c.8-3.4 3-5.1 7-5.1s6.2 1.7 7 5.1"/>',
                     'exit' => '<path d="M9 4H5.6C4.7 4 4 4.7 4 5.6v12.8c0 .9.7 1.6 1.6 1.6H9"/><path d="M14 8l4 4-4 4"/><path d="M18 12H9"/>',

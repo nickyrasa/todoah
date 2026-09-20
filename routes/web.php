@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::livewire('/', 'dashboard')->name('dashboard');
-    Route::livewire('/routines', 'routines-projects')->name('routines');
     Route::livewire('/groupe', 'groupe-view')->name('groupe');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
