@@ -11,7 +11,7 @@ function mountAvatar() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setSize(48, 48, false);
+    renderer.setSize(40, 40, false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
@@ -19,7 +19,7 @@ function mountAvatar() {
     camera.position.set(0, 0, 3);
 
     const geometry = new THREE.IcosahedronGeometry(1, 0);
-    const material = new THREE.MeshStandardMaterial({ color: 0x3d6b5c, flatShading: true });
+    const material = new THREE.MeshStandardMaterial({ color: 0x1a1b1f, flatShading: true });
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 

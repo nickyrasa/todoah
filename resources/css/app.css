@@ -4,7 +4,7 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --color-bg: var(--todoah-bg);
     --color-surface: var(--todoah-surface);
@@ -12,39 +12,78 @@
     --color-border: var(--todoah-border);
     --color-text: var(--todoah-text);
     --color-text-2: var(--todoah-text-2);
-    --color-accent: var(--todoah-accent);
-    --color-accent-soft: var(--todoah-accent-soft);
+    --color-ink: var(--todoah-ink);
+    --color-ink-text: var(--todoah-ink-text);
+    --color-success: var(--todoah-success);
+    --color-success-soft: var(--todoah-success-soft);
+    --color-info: var(--todoah-info);
+    --color-info-soft: var(--todoah-info-soft);
+    --color-reward: var(--todoah-reward);
+    --color-reward-soft: var(--todoah-reward-soft);
+    --color-ai: var(--todoah-ai);
+    --color-ai-soft: var(--todoah-ai-soft);
 }
 
 /*
-  Palette validee dans direction-artistique.md : sobre/desaturee, dark mode "doux"
-  (jamais noir/blanc purs), un seul accent. Voir CLAUDE.md pour les regles produit.
+  DA v2 (2026-09-20) : design system minimaliste noir/blanc, calque sur des
+  references concretes fournies par l'utilisateur (cartes blanches, bouton noir
+  pilule a leger degrade bleu, rings de progression verts). "ink" = le noir
+  utilise pour boutons/etats actifs, jamais reutilise comme accent de page.
+  Les couleurs fonctionnelles (success/info/reward/ai) restent de petits badges,
+  jamais des blocs pleins. Voir CLAUDE.md pour les regles produit.
 */
 :root {
-    --todoah-bg: #f6f5f2;
+    --todoah-bg: #f7f7f8;
     --todoah-surface: #ffffff;
-    --todoah-surface-2: #eeece6;
-    --todoah-border: #dbd7cd;
-    --todoah-text: #211f1a;
-    --todoah-text-2: #6f6a5c;
-    --todoah-accent: #3d6b5c;
-    --todoah-accent-soft: #e2ece7;
+    --todoah-surface-2: #f0f0f2;
+    --todoah-border: #e7e7ea;
+    --todoah-text: #14151a;
+    --todoah-text-2: #7a7c84;
+    --todoah-ink: #14151a;
+    --todoah-ink-text: #ffffff;
+    --todoah-success: #16a34a;
+    --todoah-success-soft: #dcfce8;
+    --todoah-info: #2563eb;
+    --todoah-info-soft: #e3ecfd;
+    --todoah-reward: #b8860b;
+    --todoah-reward-soft: #fdf1d1;
+    --todoah-ai: #7c4fe0;
+    --todoah-ai-soft: #efe7fd;
+    --todoah-ink-gradient: linear-gradient(135deg, #1a1b1f 0%, #223258 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --todoah-bg: #17181a;
-        --todoah-surface: #1d1f21;
-        --todoah-surface-2: #26282a;
-        --todoah-border: #34373a;
-        --todoah-text: #ece9e2;
-        --todoah-text-2: #9c988c;
-        --todoah-accent: #7bc0a6;
-        --todoah-accent-soft: #213028;
-    }
+/*
+  Mode sombre volontairement desactive pour l'instant : l'utilisateur veut un
+  design system "principalement blanc" comme identite par defaut, pas une
+  bascule automatique selon l'OS. Les tokens sombres restent prets ci-dessous
+  sous [data-theme="dark"] pour un futur bouton de bascule manuel.
+*/
+[data-theme="dark"] {
+    --todoah-bg: #121214;
+    --todoah-surface: #1b1c20;
+    --todoah-surface-2: #232429;
+    --todoah-border: #2c2d33;
+    --todoah-text: #f2f2f4;
+    --todoah-text-2: #9a9ba3;
+    --todoah-ink: #f2f2f4;
+    --todoah-ink-text: #14151a;
+    --todoah-success: #22c55e;
+    --todoah-success-soft: #123821;
+    --todoah-info: #60a5fa;
+    --todoah-info-soft: #16233d;
+    --todoah-reward: #fbbf24;
+    --todoah-reward-soft: #2c2308;
+    --todoah-ai: #b794f6;
+    --todoah-ai-soft: #241c3a;
+    --todoah-ink-gradient: linear-gradient(135deg, #ffffff 0%, #dbe7ff 100%);
 }
 
 body {
     background-color: var(--color-bg);
     color: var(--color-text);
+}
+
+.btn-ink {
+    background: var(--todoah-ink-gradient);
+    color: var(--color-ink-text);
 }
