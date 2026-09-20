@@ -11,6 +11,18 @@ new #[Layout('layouts.app')] class extends Component
 {
     public string $newTask = '';
 
+    public string $newTaskProjectId = '';
+
+    /**
+     * Projets encore en cours, proposes lors de l'ajout rapide pour rattacher
+     * une tache a un projet sans quitter "Aujourd'hui".
+     */
+    #[Computed]
+    public function activeProjects()
+    {
+        return Auth::user()->projects()->inProgress()->orderBy('position')->get();
+    }
+
     /**
      * Les taches du jour, personnelles ou issues d'un projet/routine, groupees
      * par moment de la journee. Une tache sans moment defini (frequent pour une
@@ -61,6 +73,12 @@ new #[Layout('layouts.app')] class extends Component
             return;
         }
 
+        $projectId = $this->newTaskProjectId !== '' ? (int) $this->newTaskProjectId : null;
+
+        if ($projectId !== null && ! Auth::user()->projects()->whereKey($projectId)->exists()) {
+            $projectId = null;
+        }
+
         $position = Auth::user()->tasks()
             ->scheduledOn(today())
             ->where('day_part', DayPart::Morning)
@@ -68,6 +86,7 @@ new #[Layout('layouts.app')] class extends Component
 
         Auth::user()->tasks()->create([
             'created_by_user_id' => Auth::id(),
+            'project_id' => $projectId,
             'title' => $label,
             'day_part' => DayPart::Morning,
             'scheduled_for' => today(),
@@ -75,6 +94,7 @@ new #[Layout('layouts.app')] class extends Component
         ]);
 
         $this->newTask = '';
+        $this->newTaskProjectId = '';
     }
 
     public function toggle(int $taskId): void
@@ -105,7 +125,7 @@ new #[Layout('layouts.app')] class extends Component
     <h1 class="text-3xl font-extrabold tracking-tight text-[var(--color-text)]">Aujourd'hui</h1>
     <p class="mt-1 text-sm text-[var(--color-text-2)]">{{ now()->locale('fr')->isoFormat('dddd D MMMM') }}</p>
 
-    <form wire:submit="addTask" class="mt-6 flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] py-2 pl-2 pr-5 shadow-sm">
+    <form wire:submit="addTask" class="mt-6 flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] py-2 pl-2 pr-3 shadow-sm">
         <span class="btn-ink flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-base leading-none">+</span>
         <input
             type="text"
@@ -113,6 +133,18 @@ new #[Layout('layouts.app')] class extends Component
             placeholder="Ajouter une tache..."
             class="w-full bg-transparent text-sm font-medium text-[var(--color-text)] placeholder:text-[var(--color-text-2)] focus:outline-none"
         >
+        @if ($this->activeProjects->isNotEmpty())
+            <select
+                wire:model="newTaskProjectId"
+                title="Rattacher a un projet"
+                class="shrink-0 rounded-full border-none bg-[var(--color-surface-2)] px-3 py-1.5 text-xs font-bold text-[var(--color-text-2)] focus:outline-none"
+            >
+                <option value="">Perso</option>
+                @foreach ($this->activeProjects as $project)
+                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                @endforeach
+            </select>
+        @endif
     </form>
 
     <div class="mt-10 space-y-8">
