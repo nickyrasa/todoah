@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-bg: var(--todoah-bg);
+    --color-surface: var(--todoah-surface);
+    --color-surface-2: var(--todoah-surface-2);
+    --color-border: var(--todoah-border);
+    --color-text: var(--todoah-text);
+    --color-text-2: var(--todoah-text-2);
+    --color-accent: var(--todoah-accent);
+    --color-accent-soft: var(--todoah-accent-soft);
+}
+
+/*
+  Palette validee dans direction-artistique.md : sobre/desaturee, dark mode "doux"
+  (jamais noir/blanc purs), un seul accent. Voir CLAUDE.md pour les regles produit.
+*/
+:root {
+    --todoah-bg: #f6f5f2;
+    --todoah-surface: #ffffff;
+    --todoah-surface-2: #eeece6;
+    --todoah-border: #dbd7cd;
+    --todoah-text: #211f1a;
+    --todoah-text-2: #6f6a5c;
+    --todoah-accent: #3d6b5c;
+    --todoah-accent-soft: #e2ece7;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --todoah-bg: #17181a;
+        --todoah-surface: #1d1f21;
+        --todoah-surface-2: #26282a;
+        --todoah-border: #34373a;
+        --todoah-text: #ece9e2;
+        --todoah-text-2: #9c988c;
+        --todoah-accent: #7bc0a6;
+        --todoah-accent-soft: #213028;
+    }
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
