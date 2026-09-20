@@ -216,9 +216,11 @@ new #[Layout('layouts.app')] class extends Component
     $nextTask = $this->nextTask;
 @endphp
 
-<div x-data class="mx-auto max-w-6xl px-8 py-10">
-    <h1 class="text-3xl font-extrabold tracking-tight text-[var(--color-text)]">Aujourd'hui</h1>
-    <p class="mt-1 text-sm text-[var(--color-text-2)]">{{ now()->locale('fr')->isoFormat('dddd D MMMM') }}</p>
+<div x-data class="mx-auto max-w-6xl px-4 py-6 sm:px-8 sm:py-10">
+    <div class="pr-16 sm:pr-0">
+        <h1 class="text-2xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-3xl">Aujourd'hui</h1>
+        <p class="mt-1 text-sm text-[var(--color-text-2)]">{{ now()->locale('fr')->isoFormat('dddd D MMMM') }}</p>
+    </div>
 
     <form wire:submit="addTask" class="mt-6 flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] py-2 pl-2 pr-3 shadow-sm">
         <span class="btn-ink flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-base leading-none">+</span>
@@ -226,7 +228,7 @@ new #[Layout('layouts.app')] class extends Component
             type="text"
             wire:model="newTask"
             placeholder="Ajouter une tache..."
-            class="w-full bg-transparent text-sm font-medium text-[var(--color-text)] placeholder:text-[var(--color-text-2)] focus:outline-none"
+            class="w-full min-w-0 bg-transparent text-sm font-medium text-[var(--color-text)] placeholder:text-[var(--color-text-2)] focus:outline-none"
         >
         @if ($this->activeProjects->isNotEmpty())
             <select
@@ -307,16 +309,16 @@ new #[Layout('layouts.app')] class extends Component
 
     {{-- Projets & routines --}}
     <div class="mt-10">
-        <div class="mb-4 flex items-center justify-between">
+        <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 class="text-sm font-bold uppercase tracking-wide text-[var(--color-text-2)]">Projets &amp; routines</h2>
             <form wire:submit="createProject" class="flex items-center gap-2">
                 <input
                     type="text"
                     wire:model="newProjectName"
                     placeholder="Nouveau projet..."
-                    class="w-44 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-1.5 text-xs font-semibold text-[var(--color-text)] placeholder:text-[var(--color-text-2)] focus:outline-none"
+                    class="w-full min-w-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-1.5 text-xs font-semibold text-[var(--color-text)] placeholder:text-[var(--color-text-2)] focus:outline-none sm:w-44"
                 >
-                <button type="submit" class="btn-ink rounded-full px-4 py-1.5 text-xs font-bold">+ nouveau</button>
+                <button type="submit" class="btn-ink shrink-0 rounded-full px-4 py-1.5 text-xs font-bold">+ nouveau</button>
             </form>
         </div>
 
@@ -350,8 +352,8 @@ new #[Layout('layouts.app')] class extends Component
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
-        class="fixed right-6 top-24 z-10 w-[380px] rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg"
-        style="display: none;"
+        class="fixed inset-x-4 top-24 z-10 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-lg sm:inset-x-auto sm:right-6 sm:w-[380px]"
+        x-cloak
     >
         @if ($this->openProject)
             <div class="mb-4 flex items-center justify-between">

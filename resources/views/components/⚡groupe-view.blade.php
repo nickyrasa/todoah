@@ -17,18 +17,18 @@ new #[Layout('layouts.app')] class extends Component
 };
 ?>
 
-<div class="mx-auto max-w-3xl px-8 py-10">
-    <div class="flex items-start justify-between">
+<div class="mx-auto max-w-3xl px-4 py-6 sm:px-8 sm:py-10">
+    <div class="flex flex-col gap-4 pr-16 sm:flex-row sm:items-start sm:justify-between sm:pr-0">
         <div>
-            <h1 class="text-3xl font-extrabold tracking-tight text-[var(--color-text)]">Groupe</h1>
+            <h1 class="text-2xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-3xl">Groupe</h1>
             <p class="mt-1 text-sm text-[var(--color-text-2)]">Famille - {{ count($members) }} membres</p>
         </div>
-        <button type="button" class="btn-ink rounded-full px-4 py-2 text-sm font-bold shadow-sm">
+        <button type="button" class="btn-ink w-fit rounded-full px-4 py-2 text-sm font-bold shadow-sm">
             + assigner
         </button>
     </div>
 
-    <div class="mt-8 flex gap-6">
+    <div class="mt-8 flex flex-wrap gap-6">
         @foreach ($members as $i => $member)
             <div class="flex flex-col items-center gap-2">
                 <span class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-surface-2)] text-sm font-extrabold text-[var(--color-text)]">

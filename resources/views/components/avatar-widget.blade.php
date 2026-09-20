@@ -19,7 +19,7 @@
     style="background: conic-gradient(var(--color-success) {{ $xpPercent }}%, var(--color-border) 0)"
 >
     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-surface)]">
-        <canvas id="avatar-canvas" width="40" height="40" class="pointer-events-none rounded-full"></canvas>
+        <canvas id="avatar-canvas" width="40" height="40" class="pointer-events-none h-10 w-10 rounded-full"></canvas>
     </span>
     <span class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--color-ink)] text-[10px] font-extrabold text-[var(--color-ink-text)]">{{ $level }}</span>
 </button>
@@ -33,8 +33,8 @@
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
     @click.outside="journalOpen = false"
-    class="absolute right-6 top-24 w-[360px] rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-sm"
-    style="display: none;"
+    class="fixed inset-x-4 top-24 z-10 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-sm sm:absolute sm:inset-x-auto sm:right-6 sm:w-[360px]"
+    x-cloak
 >
     <div class="mb-4 flex items-center justify-between">
         <h2 class="text-base font-extrabold text-[var(--color-text)]">Mon parcours</h2>
